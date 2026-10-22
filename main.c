@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 struct Screen {
 	BYTE *pixels;
@@ -14,11 +15,21 @@ struct Screen *create_screen(void);
 void free_screen(struct Screen *);
 
 int main(void) {
-	LARGE_INTEGER test, start, finish;
+	LARGE_INTEGER tact, start, finish;
+	double time;
+
+	if(!QueryPerformanceFrequency(&tact))
+		return -1;
+
 	struct Screen *screen = create_screen();
 	if(!screen) goto EXIT_ERROR;
-
+	
+	QueryPerformanceCounter(&start);
 	if(capture_screen(screen) != 0) goto EXIT_ERROR;
+	QueryPerformanceCounter(&finish);
+
+	time = (finish.QuadPart - start.QuadPart) / tact.QuadPart;
+	printf("Time: %f\n", time);
 
 	if(save_screen(screen, L"screen.bmp") != 0) goto EXIT_ERROR;
 
