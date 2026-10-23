@@ -28,7 +28,7 @@ int main(void) {
 	if(capture_screen(screen) != 0) goto EXIT_ERROR;
 	QueryPerformanceCounter(&finish);
 
-	time = (finish.QuadPart - start.QuadPart) / tact.QuadPart;
+	time = ((double)finish.QuadPart - (double)start.QuadPart) / (double)tact.QuadPart;
 	printf("Time: %f\n", time);
 
 	if(save_screen(screen, L"screen.bmp") != 0) goto EXIT_ERROR;
