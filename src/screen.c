@@ -1,5 +1,6 @@
 #include "screen.h"
 #include <stdlib.h>
+#include <windows.h>
 
 struct Screen {
 	BYTE *pixels;

@@ -14,13 +14,13 @@ OBJS := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRCS))
 all: $(TARGET)
 
 $(TARGET) : $(OBJS) | $(BUILD_DIR)
-	$(CC) $(CFLAGS) -o $a $(LDLIBS)
+	$(CC) $(CFLAGS) -o $@ $(LDLIBS)
 
-$(BUILD_DIR)/%.o : $(SRC_DIR)%.c | $(BUILD_DIR)
+$(BUILD_DIR)/%.o : $(SRC_DIR)/%.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BUILD_DIR): 
-	mkdir -p $(BUILD_DIR)
+	if not exits $(BUILD_DIR) mkdir $(BUILD_DIR)
 
 clean: 
-	rm -rf $(BUILD_DIR)
+	if exits  $(BUILD_DIR) rmdir /s /q $(BUILD_DIR)
