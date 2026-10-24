@@ -9,15 +9,15 @@ BUILD_DIR := build
 TARGET := $(BUILD_DIR)/screen.exe
 
 SRCS := $(wildcard $(SRC_DIR)/*.c)
-OBJS := $(patsubst $(SRC_DIR)%.c, $(BUILD_DIR)%/.o, $(SRCS))
+OBJS := $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRCS))
 
 all: $(TARGET)
 
 $(TARGET) : $(OBJS) | $(BUILD_DIR)
-	$(CC) $(CFLAGS) -o @a $(LDLIBS)
+	$(CC) $(CFLAGS) -o $a $(LDLIBS)
 
 $(BUILD_DIR)/%.o : $(SRC_DIR)%.c | $(BUILD_DIR)
-	$(CC) $(CFLAGS) -c $< -o @a
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BUILD_DIR): 
 	mkdir -p $(BUILD_DIR)
