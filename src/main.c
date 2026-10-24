@@ -1,5 +1,6 @@
 #include "screen.h"
 #include <stdio.h>
+#include <windows.h>
 
 int main(void) {
 	LARGE_INTEGER tact, start, finish;
